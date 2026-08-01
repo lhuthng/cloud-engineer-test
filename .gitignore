@@ -1,0 +1,25 @@
+# Go
+*.exe
+*.test
+*.out
+app/bin/
+app/tmp/
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+.terraform.lock.hcl
+*.tfvars
+!*.tfvars.example
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

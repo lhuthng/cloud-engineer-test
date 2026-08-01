@@ -183,6 +183,21 @@ Repeat in `prod/` with `-var-file=terraform.tfvars`. State is stored in a
 shared encrypted S3 backend with a lock file
 (`cloud-engineer-tfstate-790139457078`, key `environments/{env}/terraform.tfstate`).
 
+## If the API works but the worker processes no jobs - three checks
+
+1. **Are pending jobs stuck in the DB?** Query `SELECT status, count(*) FROM
+   jobs GROUP BY status;` and check the latest `jobs.error`. A repeated
+   `ClaimNextJob` error in CloudWatch usually points at DB connectivity.
+2. **Worker CloudWatch logs / task state.** Open the worker log group
+   (`/ecs/media-{env}-worker`) and the ECS service events. If the task is
+   crash-looping, the service `desired_count` won't be met; if it's unhealthy,
+   `ffmpeg` may be failing on the input download.
+3. **Does the worker have the right IAM + network access?** Verify the task
+   role can `s3:GetObject`/`PutObject` on the bucket and that the ECS SG is
+   still allowed inbound to the RDS SG (5432) and egress to NAT. A
+   `failed to download input` error combined with an S3 `AccessDenied`
+   indicates a stale role/policy after an apply.
+
 ## Current limitations
 
 This is a deliberately simple solution, not a production-complete platform:

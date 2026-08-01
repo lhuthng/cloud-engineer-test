@@ -1,3 +1,3 @@
 environment      = "dev"
-api_image_tag    = "dev"
-worker_image_tag = "dev"
+api_image_tag    = "1.0.0"
+worker_image_tag = "1.0.0"

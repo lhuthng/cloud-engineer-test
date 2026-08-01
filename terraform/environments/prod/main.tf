@@ -17,7 +17,8 @@ module "storage" {
 module "ecr" {
   source = "../../modules/ecr"
 
-  environment = var.environment
+  environment          = var.environment
+  image_tag_mutability = "IMMUTABLE"
 }
 
 resource "random_password" "db" {

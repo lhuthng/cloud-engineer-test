@@ -1,5 +1,11 @@
 # Cloud Engineer Test - Async Media Processing on AWS
 
+> **Status: live services shut down.** The dev environment stack was torn down
+> on 2026-08-02 (`terraform destroy`) as the assignment is complete. No AWS
+> resources remain provisioned; only the S3 tfstate backend bucket is retained.
+> To bring the stack back up, restore the Terraform from commit `0ad5329` (the
+> last commit before teardown) and follow the instructions below.
+
 Take-home assignment solution: a small asynchronous media-processing app
 (public HTTP API + private background worker + PostgreSQL + S3) running as
 containers on AWS Fargate and provisioned with Terraform.
@@ -129,6 +135,9 @@ app/
 > environment ALB. It is HTTP-only (no TLS), unauthenticated, has no rate
 > limiting, and may be rebuilt/restarted at any time. Use it only to try the
 > flow, not for anything real.
+
+> **This endpoint is currently offline** - the dev stack has been torn down
+> (see the banner at the top of this README). The URL is kept for reference.
 
 **Base URL:** `http://media-dev-alb-1228361591.eu-central-1.elb.amazonaws.com`
 

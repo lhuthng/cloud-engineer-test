@@ -81,8 +81,8 @@ locals {
     {
       name         = var.name
       image        = var.image
-      cpu          = var.cpu
-      memory       = var.memory
+      cpu          = tonumber(var.cpu)
+      memory       = tonumber(var.memory)
       essential    = true
       command      = var.command
       environment  = [for k, v in var.environment_vars : { name = k, value = v }]

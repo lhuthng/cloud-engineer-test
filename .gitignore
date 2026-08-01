@@ -17,6 +17,7 @@ app/tmp/
 .terraform.lock.hcl
 *.tfvars
 !*.tfvars.example
+!terraform.tfvars
 
 # Editor / OS
 .vscode/

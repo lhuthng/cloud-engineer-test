@@ -43,6 +43,9 @@ func main() {
 	s := &server{cfg: cfg, store: st, s3: media}
 
 	mux := http.NewServeMux()
+	mux.HandleFunc("GET /healthz", func(w http.ResponseWriter, r *http.Request) {
+		writeJSON(w, http.StatusOK, map[string]string{"status": "ok"})
+	})
 	mux.HandleFunc("POST /upload", s.handleUpload)
 	mux.HandleFunc("POST /sessions/{id}/apply", s.handleApply)
 	mux.HandleFunc("GET /sessions/{id}/status", s.handleStatus)
